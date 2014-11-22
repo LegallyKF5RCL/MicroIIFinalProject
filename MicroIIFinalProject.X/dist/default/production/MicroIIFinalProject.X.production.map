@@ -58,10 +58,10 @@ Program Memory  [Origin = 0x200, Length = 0x155ec]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xd6           0x141  (321)
-.text                        0x2d6                0x16            0x21  (33)
-.dinit                       0x2ec                 0x2             0x3  (3)
+.text                        0x2d6                0x10            0x18  (24)
+.dinit                       0x2e6                 0x2             0x3  (3)
 
-                     Total program memory used (bytes):          0x165  (357) <1%
+                     Total program memory used (bytes):          0x15c  (348) <1%
 
 
 Data Memory  [Origin = 0x1000, Length = 0x4000]
@@ -90,11 +90,11 @@ External Symbols in Program Memory (by address):
                   0x000238                  __data_init_extended
                   0x0002d2                  __DefaultInterrupt
                   0x0002d6                  _main
-                  0x0002e6                  _StartUp
+                  0x0002e0                  _StartUp
 
 External Symbols in Program Memory (by name):
 
-                  0x0002e6                  _StartUp
+                  0x0002e0                  _StartUp
                   0x0002d2                  __DefaultInterrupt
                   0x000238                  __data_init
                   0x000238                  __data_init_extended
@@ -222,10 +222,10 @@ __FUID3
  .debug_abbrev    0x000000         0x61 build/default/production/MicroIIFinalProjectMain.o
  .debug_abbrev    0x000061         0x34 build/default/production/StartUp.o
 
-.debug_line       0x000000        0x116
+.debug_line       0x000000        0x10e
  *(.debug_line)
- .debug_line      0x000000         0xcb build/default/production/MicroIIFinalProjectMain.o
- .debug_line      0x0000cb         0x4b build/default/production/StartUp.o
+ .debug_line      0x000000         0xc3 build/default/production/MicroIIFinalProjectMain.o
+ .debug_line      0x0000c3         0x4b build/default/production/StartUp.o
 
 .debug_frame      0x000000         0x48
  *(.debug_frame)
@@ -1541,11 +1541,11 @@ __c30_signature
  __c30_signature
                   0x000066          0x6 c:/program files (x86)/microchip/xc16/v1.23/bin/bin/../../lib\libpic30-elf.a(data_init_extendedep.o)
 
-.text             0x0002d6         0x16
- .text            0x0002d6         0x10 build/default/production/MicroIIFinalProjectMain.o
+.text             0x0002d6         0x10
+ .text            0x0002d6          0xa build/default/production/MicroIIFinalProjectMain.o
                   0x0002d6                  _main
- .text            0x0002e6          0x6 build/default/production/StartUp.o
-                  0x0002e6                  _StartUp
+ .text            0x0002e0          0x6 build/default/production/StartUp.o
+                  0x0002e0                  _StartUp
 
-.dinit            0x0002ec          0x2
- .dinit           0x0002ec          0x2 data_init
+.dinit            0x0002e6          0x2
+ .dinit           0x0002e6          0x2 data_init
