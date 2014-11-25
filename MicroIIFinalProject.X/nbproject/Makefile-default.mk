@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=MicroIIFinalProjectMain.c StartUp.c
+SOURCEFILES_QUOTED_IF_SPACED=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o.d ${OBJECTDIR}/StartUp.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o.d ${OBJECTDIR}/StartUp.o.d ${OBJECTDIR}/SetupADC.o.d ${OBJECTDIR}/GetADC.o.d ${OBJECTDIR}/UpdateTable.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o
+OBJECTFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o
 
 # Source Files
-SOURCEFILES=MicroIIFinalProjectMain.c StartUp.c
+SOURCEFILES=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c
 
 
 CFLAGS=
@@ -96,6 +96,27 @@ ${OBJECTDIR}/StartUp.o: StartUp.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  StartUp.c  -o ${OBJECTDIR}/StartUp.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/StartUp.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/StartUp.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/SetupADC.o: SetupADC.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/SetupADC.o.d 
+	@${RM} ${OBJECTDIR}/SetupADC.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  SetupADC.c  -o ${OBJECTDIR}/SetupADC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SetupADC.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/SetupADC.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/GetADC.o: GetADC.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/GetADC.o.d 
+	@${RM} ${OBJECTDIR}/GetADC.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  GetADC.c  -o ${OBJECTDIR}/GetADC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/GetADC.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/GetADC.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/UpdateTable.o: UpdateTable.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/UpdateTable.o.d 
+	@${RM} ${OBJECTDIR}/UpdateTable.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  UpdateTable.c  -o ${OBJECTDIR}/UpdateTable.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UpdateTable.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/UpdateTable.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/MicroIIFinalProjectMain.o: MicroIIFinalProjectMain.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
@@ -110,6 +131,27 @@ ${OBJECTDIR}/StartUp.o: StartUp.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/StartUp.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  StartUp.c  -o ${OBJECTDIR}/StartUp.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/StartUp.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/StartUp.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/SetupADC.o: SetupADC.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/SetupADC.o.d 
+	@${RM} ${OBJECTDIR}/SetupADC.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  SetupADC.c  -o ${OBJECTDIR}/SetupADC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SetupADC.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/SetupADC.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/GetADC.o: GetADC.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/GetADC.o.d 
+	@${RM} ${OBJECTDIR}/GetADC.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  GetADC.c  -o ${OBJECTDIR}/GetADC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/GetADC.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/GetADC.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/UpdateTable.o: UpdateTable.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/UpdateTable.o.d 
+	@${RM} ${OBJECTDIR}/UpdateTable.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  UpdateTable.c  -o ${OBJECTDIR}/UpdateTable.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UpdateTable.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/UpdateTable.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

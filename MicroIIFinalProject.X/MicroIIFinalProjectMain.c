@@ -10,8 +10,9 @@
 #include <math.h>
 #include <p33EP128GP502.h>
 #include <adc.h>
-
-void StartUp(void);
+#include <Generic.h>
+#include "MicroIIFinalProjectHeader.h"
+//#include "UpdateTable.c"
 
 //Setup Oscilator at nominal 7.37MHz
 _FICD(ICS_PGD1 &            //programming pins
@@ -34,40 +35,20 @@ _FOSCSEL(FNOSC_FRC &        //start off with RC
         IESO_OFF
         );
 
+
 int main(int argc, char** argv) {
 
     StartUp();
+    SetupADC();
 
-    /*
-    OpenADC1(//config1
-            ADC_MODULE_ON &     //turn on the module
-            ADC_IDLE_CONTINUE & //continue in idle mode
-            ADC_AD12B_10BIT &    //10 bit mode - 4 channel
-            ADC_FORMAT_INTG &        //ADC formatted as unsigned integer
-                                    //header says just integer (assuming unsigned)
-            ADC_SSRC_AUTO &     //i have no idea what these do
-                                //I need to read family ref
-                                //until then ill just try to fill out the config
-            ADC_CLK_AUTO &
-            ADC_SIMULTANEOUS &  //sample all channels imultaneously
-            ,
-            //config2
-            ,
-            //config3
-            ,
-            //config4
-            ,
-            //configport_l
-            ,
-            //configport_h
-            ,
-            //configscan_h
-            ,
-            //configscan_l
-            );
-    */
+    Amp = 1.0;  //global variable works in main
+    Freq = 100;
 
-    while(1);   //HALTEN SIE
+    while(1)
+    {
+        GetADC();
+        UpdateTable(Amp, Freq);
+    }
 
     return (EXIT_SUCCESS);
 }

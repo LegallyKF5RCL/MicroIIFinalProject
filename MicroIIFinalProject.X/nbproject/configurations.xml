@@ -14,6 +14,10 @@
                    projectFiles="true">
       <itemPath>MicroIIFinalProjectMain.c</itemPath>
       <itemPath>StartUp.c</itemPath>
+      <itemPath>SetupADC.c</itemPath>
+      <itemPath>GetADC.c</itemPath>
+      <itemPath>UpdateTable.c</itemPath>
+      <itemPath>MicroIIFinalProjectHeader.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

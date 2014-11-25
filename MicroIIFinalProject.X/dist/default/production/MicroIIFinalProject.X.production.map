@@ -23,6 +23,9 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.23/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/MicroIIFinalProjectMain.o \
   build/default/production/StartUp.o \
+  build/default/production/SetupADC.o \
+  build/default/production/GetADC.o \
+  build/default/production/UpdateTable.o \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
   -Tp33EP128GP502.gld.00 \
@@ -58,18 +61,20 @@ Program Memory  [Origin = 0x200, Length = 0x155ec]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xd6           0x141  (321)
-.text                        0x2d6                0x10            0x18  (24)
-.dinit                       0x2e6                 0x2             0x3  (3)
+.text                        0x2d6                0xa0            0xf0  (240)
+.dinit                       0x376                 0x8             0xc  (12)
+.text                        0x37e                 0x6             0x9  (9)
 
-                     Total program memory used (bytes):          0x15c  (348) <1%
+                     Total program memory used (bytes):          0x246  (582) <1%
 
 
 Data Memory  [Origin = 0x1000, Length = 0x4000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
+.nbss                       0x1000                   0             0x8  (8)
 
-                        Total data memory used (bytes):              0  (0) 
+                        Total data memory used (bytes):            0x8  (8) <1%
 
 
 Dynamic Memory Usage
@@ -77,30 +82,48 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                       0x1000                              0x4000  (16384)
+stack                       0x1008                              0x3ff8  (16376)
 
-                        Maximum dynamic memory (bytes):         0x4000  (16384)
+                        Maximum dynamic memory (bytes):         0x3ff8  (16376)
 
+
+External Symbols in Data Memory (by address):
+
+                    0x1000                  _Amp
+                    0x1004                  _Freq
+                    0x1006                  _SignalTable
+
+External Symbols in Data Memory (by name):
+
+                    0x1000                  _Amp
+                    0x1004                  _Freq
+                    0x1006                  _SignalTable
 
 External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00022c                  __psv_init
-                  0x000238                  __data_init
                   0x000238                  __data_init_extended
+                  0x000238                  __data_init
                   0x0002d2                  __DefaultInterrupt
-                  0x0002d6                  _main
-                  0x0002e0                  _StartUp
+                  0x0002d6                  _SetupADC
+                  0x000338                  _main
+                  0x00035e                  _UpdateTable
+                  0x00036c                  _GetADC
+                  0x00037e                  _StartUp
 
 External Symbols in Program Memory (by name):
 
-                  0x0002e0                  _StartUp
+                  0x00036c                  _GetADC
+                  0x0002d6                  _SetupADC
+                  0x00037e                  _StartUp
+                  0x00035e                  _UpdateTable
                   0x0002d2                  __DefaultInterrupt
                   0x000238                  __data_init
                   0x000238                  __data_init_extended
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0002d6                  _main
+                  0x000338                  _main
 
 Memory Configuration
 
@@ -125,6 +148,9 @@ Linker script and memory map
 
 LOAD build/default/production/MicroIIFinalProjectMain.o
 LOAD build/default/production/StartUp.o
+LOAD build/default/production/SetupADC.o
+LOAD build/default/production/GetADC.o
+LOAD build/default/production/UpdateTable.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD c:/program files (x86)/microchip/xc16/v1.23/bin/bin/../../lib/dsPIC33E\libp33EP128GP502-elf.a
 LOAD c:/program files (x86)/microchip/xc16/v1.23/bin/bin/../../lib\libfx-elf.a
@@ -211,26 +237,42 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x331
+.debug_info       0x000000        0xdcd
  *(.debug_info)
- .debug_info      0x000000        0x1e6 build/default/production/MicroIIFinalProjectMain.o
- .debug_info      0x0001e6        0x14b build/default/production/StartUp.o
+ .debug_info      0x000000        0x279 build/default/production/MicroIIFinalProjectMain.o
+ .debug_info      0x000279        0x14b build/default/production/StartUp.o
+ .debug_info      0x0003c4        0x761 build/default/production/SetupADC.o
+ .debug_info      0x000b25        0x133 build/default/production/GetADC.o
+ .debug_info      0x000c58        0x175 build/default/production/UpdateTable.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000         0x95
+.debug_abbrev     0x000000        0x223
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0x61 build/default/production/MicroIIFinalProjectMain.o
- .debug_abbrev    0x000061         0x34 build/default/production/StartUp.o
+ .debug_abbrev    0x000000         0xa2 build/default/production/MicroIIFinalProjectMain.o
+ .debug_abbrev    0x0000a2         0x34 build/default/production/StartUp.o
+ .debug_abbrev    0x0000d6         0xb6 build/default/production/SetupADC.o
+ .debug_abbrev    0x00018c         0x43 build/default/production/GetADC.o
+ .debug_abbrev    0x0001cf         0x54 build/default/production/UpdateTable.o
 
-.debug_line       0x000000        0x10e
+.debug_line       0x000000        0x4d2
  *(.debug_line)
- .debug_line      0x000000         0xc3 build/default/production/MicroIIFinalProjectMain.o
- .debug_line      0x0000c3         0x4b build/default/production/StartUp.o
+ .debug_line      0x000000        0x170 build/default/production/MicroIIFinalProjectMain.o
+ .debug_line      0x000170         0x4b build/default/production/StartUp.o
+ .debug_line      0x0001bb        0x1a2 build/default/production/SetupADC.o
+ .debug_line      0x00035d         0xb8 build/default/production/GetADC.o
+ .debug_line      0x000415         0xbd build/default/production/UpdateTable.o
 
-.debug_frame      0x000000         0x48
+.debug_frame      0x000000         0xb4
  *(.debug_frame)
  .debug_frame     0x000000         0x24 build/default/production/MicroIIFinalProjectMain.o
  .debug_frame     0x000024         0x24 build/default/production/StartUp.o
+ .debug_frame     0x000048         0x24 build/default/production/SetupADC.o
+ .debug_frame     0x00006c         0x24 build/default/production/GetADC.o
+ .debug_frame     0x000090         0x24 build/default/production/UpdateTable.o
+
+.debug_str        0x000000         0x30
+ *(.debug_str)
+ .debug_str       0x000000         0x30 build/default/production/SetupADC.o
 
 .debug_loc
  *(.debug_loc)
@@ -239,22 +281,34 @@ __FUID3
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0x6e
+                  0x000000         0xed
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x50 build/default/production/MicroIIFinalProjectMain.o
+                  0x000000         0x71 build/default/production/MicroIIFinalProjectMain.o
  .debug_pubnames
-                  0x000050         0x1e build/default/production/StartUp.o
+                  0x000071         0x1e build/default/production/StartUp.o
+ .debug_pubnames
+                  0x00008f         0x1f build/default/production/SetupADC.o
+ .debug_pubnames
+                  0x0000ae         0x1d build/default/production/GetADC.o
+ .debug_pubnames
+                  0x0000cb         0x22 build/default/production/UpdateTable.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x30
+.debug_aranges    0x000000         0x78
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/MicroIIFinalProjectMain.o
  .debug_aranges
                   0x000018         0x18 build/default/production/StartUp.o
+ .debug_aranges
+                  0x000030         0x18 build/default/production/SetupADC.o
+ .debug_aranges
+                  0x000048         0x18 build/default/production/GetADC.o
+ .debug_aranges
+                  0x000060         0x18 build/default/production/UpdateTable.o
 
 .ivt              0x000004        0x13e
                   0x000004          0x4 LONG 0x2d2 DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
@@ -1524,28 +1578,54 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000030         0x24
+                  0x000078        0x112
  .debug_pubtypes
-                  0x000030         0x12 build/default/production/MicroIIFinalProjectMain.o
+                  0x000078         0x1d build/default/production/MicroIIFinalProjectMain.o
  .debug_pubtypes
-                  0x000042         0x12 build/default/production/StartUp.o
+                  0x000095         0x12 build/default/production/StartUp.o
+ .debug_pubtypes
+                  0x0000a7         0xa9 build/default/production/SetupADC.o
+ .debug_pubtypes
+                  0x000150         0x1d build/default/production/GetADC.o
+ .debug_pubtypes
+                  0x00016d         0x1d build/default/production/UpdateTable.o
 
 __c30_signature
-                  0x000054         0x18
+                  0x00018a         0x2a
  __c30_signature
-                  0x000054          0x6 build/default/production/MicroIIFinalProjectMain.o
+                  0x00018a          0x6 build/default/production/MicroIIFinalProjectMain.o
  __c30_signature
-                  0x00005a          0x6 build/default/production/StartUp.o
+                  0x000190          0x6 build/default/production/StartUp.o
  __c30_signature
-                  0x000060          0x6 c:/program files (x86)/microchip/xc16/v1.23/bin/bin/../../lib\libpic30-elf.a(crt0_extendedep.o)
+                  0x000196          0x6 build/default/production/SetupADC.o
  __c30_signature
-                  0x000066          0x6 c:/program files (x86)/microchip/xc16/v1.23/bin/bin/../../lib\libpic30-elf.a(data_init_extendedep.o)
+                  0x00019c          0x6 build/default/production/GetADC.o
+ __c30_signature
+                  0x0001a2          0x6 build/default/production/UpdateTable.o
+ __c30_signature
+                  0x0001a8          0x6 c:/program files (x86)/microchip/xc16/v1.23/bin/bin/../../lib\libpic30-elf.a(crt0_extendedep.o)
+ __c30_signature
+                  0x0001ae          0x6 c:/program files (x86)/microchip/xc16/v1.23/bin/bin/../../lib\libpic30-elf.a(data_init_extendedep.o)
 
-.text             0x0002d6         0x10
- .text            0x0002d6          0xa build/default/production/MicroIIFinalProjectMain.o
-                  0x0002d6                  _main
- .text            0x0002e0          0x6 build/default/production/StartUp.o
-                  0x0002e0                  _StartUp
+.nbss               0x1000          0x8
+ .nbss              0x1000          0x8 build/default/production/MicroIIFinalProjectMain.o
+                    0x1000                  _Amp
+                    0x1004                  _Freq
+                    0x1006                  _SignalTable
 
-.dinit            0x0002e6          0x2
- .dinit           0x0002e6          0x2 data_init
+.text             0x0002d6         0xa0
+ .text            0x0002d6         0x62 build/default/production/SetupADC.o
+                  0x0002d6                  _SetupADC
+ .text            0x000338         0x26 build/default/production/MicroIIFinalProjectMain.o
+                  0x000338                  _main
+ .text            0x00035e          0xe build/default/production/UpdateTable.o
+                  0x00035e                  _UpdateTable
+ .text            0x00036c          0xa build/default/production/GetADC.o
+                  0x00036c                  _GetADC
+
+.dinit            0x000376          0x8
+ .dinit           0x000376          0x8 data_init
+
+.text             0x00037e          0x6
+ .text            0x00037e          0x6 build/default/production/StartUp.o
+                  0x00037e                  _StartUp

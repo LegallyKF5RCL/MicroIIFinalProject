@@ -1,2 +1,3 @@
 build/default/production/MicroIIFinalProjectMain.o:  \
- MicroIIFinalProjectMain.c 
+ MicroIIFinalProjectMain.c  \
+MicroIIFinalProjectHeader.h 
