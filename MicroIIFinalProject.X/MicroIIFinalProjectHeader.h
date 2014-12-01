@@ -8,6 +8,11 @@
 //DEFINES
 #define DIVISIONS 100
 
+//DEBUG DEFINES
+    #define DEBUG
+    //#define UART_TX
+    #define UART_RX
+
 //GLOBALS
 extern UINT8 WaveSelect;
 extern UINT8 UpdateIndex;
@@ -27,4 +32,6 @@ UINT16 UpdateTable(void);
 UINT16 SetupADC(void);
 UINT16 SetupSPI(void);
 UINT16 SetupUART(void);
+UINT16 ModuleDebug(void);
+UINT16 Initialize(void);
 void StartUp(void);

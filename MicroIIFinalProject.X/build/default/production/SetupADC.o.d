@@ -1,2 +1,3 @@
 build/default/production/SetupADC.o:  \
-SetupADC.c 
+SetupADC.c  \
+ MicroIIFinalProjectHeader.h 

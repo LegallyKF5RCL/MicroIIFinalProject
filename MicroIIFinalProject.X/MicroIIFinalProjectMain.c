@@ -78,17 +78,31 @@ _FOSCSEL(FNOSC_FRC &        //start off with RC
 
 int main(int argc, char** argv) {
 
+    Initialize();
     StartUp();
-    SetupADC();
+    //SetupADC();
+    //SetupSPI();
+    SetupUART();
+    ModuleDebug();
 
-
-
+    while(1);
+    /*
     while(1)
     {
         GetADC();
         UpdateTable();
     }
-
+    */
+    
     return (EXIT_SUCCESS);
 }
 
+void __attribute__ ((auto_psv))     _ISR     	_U1RXInterrupt(void)
+{
+    //printf("ISRGET!");
+    U1TXREG = U1RXREG;      //echo recieved character
+
+    _U1RXIF = 0;          //clear interrupt flag
+
+    return;
+}

@@ -1,2 +1,3 @@
 build/default/production/SetupUART.o:  \
-SetupUART.c 
+SetupUART.c  \
+ MicroIIFinalProjectHeader.h 
