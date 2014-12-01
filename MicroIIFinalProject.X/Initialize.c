@@ -9,6 +9,8 @@ UINT16 Initialize(void)
     TRISB = 0x0000;
     ANSELA = 0xFFFF;
     ANSELB = 0xFFFF;
+    //LATA = 0x0000;
+    //LATB = 0x0000;
 
     TRISAbits.TRISA4 = 1;   //make the RX pin an input
 

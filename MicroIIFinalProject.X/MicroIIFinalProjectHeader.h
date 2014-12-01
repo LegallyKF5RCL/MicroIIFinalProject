@@ -8,10 +8,6 @@
 //DEFINES
 #define DIVISIONS 100
 
-//DEBUG DEFINES
-    #define DEBUG
-    //#define UART_TX
-    #define UART_RX
 
 //GLOBALS
 extern UINT8 WaveSelect;

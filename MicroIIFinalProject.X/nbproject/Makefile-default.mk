@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c SetupSPI.c SetupUART.c ModuleDebug.c Initialize.c
+SOURCEFILES_QUOTED_IF_SPACED=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c SetupSPI.c SetupUART.c Initialize.c ModuleDebug.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o ${OBJECTDIR}/SetupSPI.o ${OBJECTDIR}/SetupUART.o ${OBJECTDIR}/ModuleDebug.o ${OBJECTDIR}/Initialize.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o.d ${OBJECTDIR}/StartUp.o.d ${OBJECTDIR}/SetupADC.o.d ${OBJECTDIR}/GetADC.o.d ${OBJECTDIR}/UpdateTable.o.d ${OBJECTDIR}/SetupSPI.o.d ${OBJECTDIR}/SetupUART.o.d ${OBJECTDIR}/ModuleDebug.o.d ${OBJECTDIR}/Initialize.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o ${OBJECTDIR}/SetupSPI.o ${OBJECTDIR}/SetupUART.o ${OBJECTDIR}/Initialize.o ${OBJECTDIR}/ModuleDebug.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o.d ${OBJECTDIR}/StartUp.o.d ${OBJECTDIR}/SetupADC.o.d ${OBJECTDIR}/GetADC.o.d ${OBJECTDIR}/UpdateTable.o.d ${OBJECTDIR}/SetupSPI.o.d ${OBJECTDIR}/SetupUART.o.d ${OBJECTDIR}/Initialize.o.d ${OBJECTDIR}/ModuleDebug.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o ${OBJECTDIR}/SetupSPI.o ${OBJECTDIR}/SetupUART.o ${OBJECTDIR}/ModuleDebug.o ${OBJECTDIR}/Initialize.o
+OBJECTFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o ${OBJECTDIR}/SetupSPI.o ${OBJECTDIR}/SetupUART.o ${OBJECTDIR}/Initialize.o ${OBJECTDIR}/ModuleDebug.o
 
 # Source Files
-SOURCEFILES=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c SetupSPI.c SetupUART.c ModuleDebug.c Initialize.c
+SOURCEFILES=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c SetupSPI.c SetupUART.c Initialize.c ModuleDebug.c
 
 
 CFLAGS=
@@ -131,19 +131,19 @@ ${OBJECTDIR}/SetupUART.o: SetupUART.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  SetupUART.c  -o ${OBJECTDIR}/SetupUART.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SetupUART.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/SetupUART.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/ModuleDebug.o: ModuleDebug.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/ModuleDebug.o.d 
-	@${RM} ${OBJECTDIR}/ModuleDebug.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ModuleDebug.c  -o ${OBJECTDIR}/ModuleDebug.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ModuleDebug.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/ModuleDebug.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/Initialize.o: Initialize.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/Initialize.o.d 
 	@${RM} ${OBJECTDIR}/Initialize.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Initialize.c  -o ${OBJECTDIR}/Initialize.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Initialize.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/Initialize.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/ModuleDebug.o: ModuleDebug.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/ModuleDebug.o.d 
+	@${RM} ${OBJECTDIR}/ModuleDebug.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ModuleDebug.c  -o ${OBJECTDIR}/ModuleDebug.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ModuleDebug.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/ModuleDebug.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/MicroIIFinalProjectMain.o: MicroIIFinalProjectMain.c  nbproject/Makefile-${CND_CONF}.mk
@@ -195,19 +195,19 @@ ${OBJECTDIR}/SetupUART.o: SetupUART.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  SetupUART.c  -o ${OBJECTDIR}/SetupUART.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SetupUART.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/SetupUART.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/ModuleDebug.o: ModuleDebug.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/ModuleDebug.o.d 
-	@${RM} ${OBJECTDIR}/ModuleDebug.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ModuleDebug.c  -o ${OBJECTDIR}/ModuleDebug.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ModuleDebug.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
-	@${FIXDEPS} "${OBJECTDIR}/ModuleDebug.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/Initialize.o: Initialize.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
 	@${RM} ${OBJECTDIR}/Initialize.o.d 
 	@${RM} ${OBJECTDIR}/Initialize.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Initialize.c  -o ${OBJECTDIR}/Initialize.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Initialize.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/Initialize.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/ModuleDebug.o: ModuleDebug.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/ModuleDebug.o.d 
+	@${RM} ${OBJECTDIR}/ModuleDebug.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ModuleDebug.c  -o ${OBJECTDIR}/ModuleDebug.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ModuleDebug.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/ModuleDebug.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

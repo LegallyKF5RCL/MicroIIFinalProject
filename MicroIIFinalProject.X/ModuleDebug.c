@@ -4,16 +4,16 @@
 #include "MicroIIFinalProjectHeader.h"
 
 
-//ALL DEBUG DEFINES LOCATED IN HEADER
+
+//DEBUG DEFINES
+    //#define DEBUG
+    //#define UART_TX
+    #define UART_RX
+    //#define SPI_DEBUG
 
 UINT16 ModuleDebug(void)
 {
-#ifdef DEBUG    //lets all other debug routines turn on
-                //if not defined, this entire function should be empty
-#warning SYSTEM_IN_DEBUG_MODE
-
-
-       
+  
 #ifdef UART_TX
 #warning DEBUG_MODE_UART_TX_ONLY
         UINT16 i, j; //arbitrary counters
@@ -37,8 +37,21 @@ UINT16 ModuleDebug(void)
                         //ISR should handle the echo
 #endif  //UART_RX end
 
-#endif  //main debug end
+#ifdef SPI_DEBUG
+#warning DEBUG_MODE_SPI_ONLY
+        UINT16 i, j; //arbitrary counters
+        while(1){
+        for(i = 0; i < 0x000F; i++)
+        {
+            for(j = 0; j < 0xFFFF; j++)
+            {
+                asm("NOP");     //blocking wait
+            }
+        }
 
+        SPI2BUF = 0x5AA5;     //write to the SPI Buffer
+        }
+#endif  //SPI_DEBUG end
 
-    return 0; //Return success
+return 0; //Return success
 }

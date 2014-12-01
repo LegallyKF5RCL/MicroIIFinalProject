@@ -80,27 +80,30 @@ int main(int argc, char** argv) {
 
     Initialize();
     StartUp();
-    //SetupADC();
-    //SetupSPI();
     SetupUART();
+    SetupSPI();
+    SetupADC();
     ModuleDebug();
-
+   
+    printf("!");
     while(1);
-    /*
+    
     while(1)
     {
         GetADC();
         UpdateTable();
+        //U1TXREG = 0x5A;
     }
-    */
+    
     
     return (EXIT_SUCCESS);
 }
 
-void __attribute__ ((auto_psv))     _ISR     	_U1RXInterrupt(void)
+void __attribute__ ((auto_psv))     _ISR  _U1RXInterrupt(void)
 {
     //printf("ISRGET!");
-    U1TXREG = U1RXREG;      //echo recieved character
+    //U1TXREG = U1RXREG;      //echo recieved character
+    U1TXREG = 0x5A;
 
     _U1RXIF = 0;          //clear interrupt flag
 
