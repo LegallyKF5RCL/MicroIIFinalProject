@@ -12,7 +12,47 @@
 #include <adc.h>
 #include <Generic.h>
 #include "MicroIIFinalProjectHeader.h"
-//#include "UpdateTable.c"
+
+double Amp = 0.0;
+UINT16 Freq = 0;
+UINT8 WaveSelect = 1;
+UINT8 UpdateIndex;
+UINT8 WaveIndex;
+
+//initialize Max amplitude signal tables
+//these are constants to be multiplied down by the ADC factor
+const UINT16 ConstSinSignalTable[DIVISIONS] = {128, 144, 159, 175, 189, 203, 215, 226, 236, 243,
+                                    249, 253, 255, 255, 253, 249, 243, 236, 226, 215,
+                                    203, 189, 175, 159, 144, 128, 111, 96, 80, 66,
+                                    52, 40, 29, 19, 12, 6, 2, 0, 0, 2,
+                                    6, 12, 19, 29, 40, 52, 66, 80, 96, 111,
+                                    128, 144, 159, 175, 189, 203, 215, 226, 236, 243,
+                                    249, 253, 255, 255, 253, 249, 243, 236, 226, 215,
+                                    203, 189, 175, 159, 144, 128, 111, 96, 80, 66,
+                                    52, 40, 29, 19, 12, 6, 2, 0, 0, 2,
+                                    6, 12, 19, 29, 40, 52, 66, 80, 96, 111};
+
+const UINT16 ConstSqrSignalTable[DIVISIONS] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ,0x00,
+                                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ,0x00,
+                                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ,0x00,
+                                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ,0x00,
+                                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ,0x00,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+
+const UINT16 ConstTriSignalTable[DIVISIONS] = {0, 5, 10, 15, 20, 26, 31, 36, 41, 46,
+                                    51, 56, 61, 66, 71, 77, 82, 87, 92, 97,
+                                    102, 107, 112, 117, 122, 127, 132, 137, 142, 147,
+                                    153, 158, 163, 168, 173, 178, 183, 188, 193, 198,
+                                    204, 209, 214, 219, 224, 229, 234, 239, 244, 250,
+                                    250, 244, 239, 234, 229, 224, 219, 214, 209, 204,
+                                    198, 193, 188, 183, 178, 173, 168, 163, 158, 153,
+                                    147, 142, 137, 132, 127, 122, 117, 112, 107, 102,
+                                    97, 92, 87, 82, 77, 71, 66, 61, 56, 51,
+                                    46, 41, 36, 31, 26, 20, 15, 10, 5, 0};
 
 //Setup Oscilator at nominal 7.37MHz
 _FICD(ICS_PGD1 &            //programming pins
@@ -41,13 +81,12 @@ int main(int argc, char** argv) {
     StartUp();
     SetupADC();
 
-    Amp = 1.0;  //global variable works in main
-    Freq = 100;
+
 
     while(1)
     {
         GetADC();
-        UpdateTable(Amp, Freq);
+        UpdateTable();
     }
 
     return (EXIT_SUCCESS);

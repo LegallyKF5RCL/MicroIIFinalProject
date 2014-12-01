@@ -1,2 +1,3 @@
 build/default/production/UpdateTable.o:  \
-UpdateTable.c 
+UpdateTable.c  \
+ MicroIIFinalProjectHeader.h 

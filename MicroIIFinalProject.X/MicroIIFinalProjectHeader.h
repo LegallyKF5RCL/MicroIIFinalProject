@@ -6,15 +6,25 @@
  */
 
 //DEFINES
-#define DIVISIONS 1
+#define DIVISIONS 100
 
 //GLOBALS
-double Amp;
-UINT16 Freq;
-UINT16 SignalTable[DIVISIONS] = {0x00};
+extern UINT8 WaveSelect;
+extern UINT8 UpdateIndex;
+extern UINT8 WaveIndex;
+extern double Amp;
+extern UINT16 Freq;
+extern const UINT16 ConstSinSignalTable[DIVISIONS];
+extern const UINT16 ConstSqrSignalTable[DIVISIONS];
+extern const UINT16 ConstTriSignalTable[DIVISIONS];
+extern double SinSignalTable[DIVISIONS];
+extern double SqrSignalTable[DIVISIONS];
+extern double TriSignalTable[DIVISIONS];
 
 //FUNCTION DECLARATIONS
 UINT16 GetADC(void);
-UINT16 UpdateTable(double AmpUpdate, UINT16 FreqUpdate);
+UINT16 UpdateTable(void);
 UINT16 SetupADC(void);
+UINT16 SetupSPI(void);
+UINT16 SetupUART(void);
 void StartUp(void);

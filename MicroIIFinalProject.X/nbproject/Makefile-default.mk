@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c
+SOURCEFILES_QUOTED_IF_SPACED=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c SetupSPI.c SetupUART.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o.d ${OBJECTDIR}/StartUp.o.d ${OBJECTDIR}/SetupADC.o.d ${OBJECTDIR}/GetADC.o.d ${OBJECTDIR}/UpdateTable.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o ${OBJECTDIR}/SetupSPI.o ${OBJECTDIR}/SetupUART.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o.d ${OBJECTDIR}/StartUp.o.d ${OBJECTDIR}/SetupADC.o.d ${OBJECTDIR}/GetADC.o.d ${OBJECTDIR}/UpdateTable.o.d ${OBJECTDIR}/SetupSPI.o.d ${OBJECTDIR}/SetupUART.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o
+OBJECTFILES=${OBJECTDIR}/MicroIIFinalProjectMain.o ${OBJECTDIR}/StartUp.o ${OBJECTDIR}/SetupADC.o ${OBJECTDIR}/GetADC.o ${OBJECTDIR}/UpdateTable.o ${OBJECTDIR}/SetupSPI.o ${OBJECTDIR}/SetupUART.o
 
 # Source Files
-SOURCEFILES=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c
+SOURCEFILES=MicroIIFinalProjectMain.c StartUp.c SetupADC.c GetADC.c UpdateTable.c SetupSPI.c SetupUART.c
 
 
 CFLAGS=
@@ -117,6 +117,20 @@ ${OBJECTDIR}/UpdateTable.o: UpdateTable.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  UpdateTable.c  -o ${OBJECTDIR}/UpdateTable.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UpdateTable.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/UpdateTable.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/SetupSPI.o: SetupSPI.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/SetupSPI.o.d 
+	@${RM} ${OBJECTDIR}/SetupSPI.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  SetupSPI.c  -o ${OBJECTDIR}/SetupSPI.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SetupSPI.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/SetupSPI.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/SetupUART.o: SetupUART.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/SetupUART.o.d 
+	@${RM} ${OBJECTDIR}/SetupUART.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  SetupUART.c  -o ${OBJECTDIR}/SetupUART.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SetupUART.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -mno-eds-warn  -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/SetupUART.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/MicroIIFinalProjectMain.o: MicroIIFinalProjectMain.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
@@ -152,6 +166,20 @@ ${OBJECTDIR}/UpdateTable.o: UpdateTable.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/UpdateTable.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  UpdateTable.c  -o ${OBJECTDIR}/UpdateTable.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UpdateTable.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/UpdateTable.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/SetupSPI.o: SetupSPI.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/SetupSPI.o.d 
+	@${RM} ${OBJECTDIR}/SetupSPI.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  SetupSPI.c  -o ${OBJECTDIR}/SetupSPI.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SetupSPI.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/SetupSPI.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/SetupUART.o: SetupUART.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/SetupUART.o.d 
+	@${RM} ${OBJECTDIR}/SetupUART.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  SetupUART.c  -o ${OBJECTDIR}/SetupUART.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/SetupUART.o.d"      -mno-eds-warn  -g -omf=elf -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/SetupUART.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 
