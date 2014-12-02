@@ -10,7 +10,7 @@ UINT16 SetupUART(void)
 {
 
     PPSOutput(OUT_FN_PPS_U1TX, OUT_PIN_PPS_RP37);
-    PPSInput(IN_FN_PPS_U1RX, IN_PIN_PPS_RP20);
+    PPSInput(PPS_U1RX, PPS_RP20);
 
 
  OpenUART1(UART_EN &
