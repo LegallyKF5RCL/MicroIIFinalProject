@@ -27,7 +27,7 @@ UINT16 GetADC(void);
 UINT16 UpdateTable(void);
 UINT16 SetupADC(void);
 UINT16 SetupSPI(void);
-UINT16 SetupUART(void);
+void SetupUART(void);
 UINT16 ModuleDebug(void);
 UINT16 Initialize(void);
 void StartUp(void);

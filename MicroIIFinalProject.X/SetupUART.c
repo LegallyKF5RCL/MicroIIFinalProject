@@ -6,7 +6,7 @@
 #include "MicroIIFinalProjectHeader.h"
 
 
-UINT16 SetupUART(void)
+void SetupUART(void)
 {
 
     PPSOutput(OUT_FN_PPS_U1TX, OUT_PIN_PPS_RP37);
@@ -39,7 +39,7 @@ UINT16 SetupUART(void)
             U1STAbits.UTXINV = 0;           //make TX active low
             //U1STAbits.URXISEL = 0x00;       //force interrupt on every 8 bits recieved
 
-            ConfigIntUART1(UART_RX_INT_EN &
+            ConfigIntUART1(UART_RX_INT_DIS &
                     UART_RX_INT_PR4 &
                     UART_TX_INT_DIS
                     );
@@ -71,5 +71,5 @@ UINT16 SetupUART(void)
             U1STAbits.UTXINV = 0;
             */
 
-    return 0;   //return success
+    return;   //return success
 }

@@ -32,6 +32,9 @@ UINT16 ModuleDebug(void)
 
 #ifdef UART_RX          //echo a recieved character
 #warning DEBUG_STATE_UART_RX_ONLY
+
+
+
         printf("GO!");
         while(1);       //wait for user input
                         //ISR should handle the echo
