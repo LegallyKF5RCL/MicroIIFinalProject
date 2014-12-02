@@ -12,7 +12,7 @@ UINT16 Initialize(void)
     //LATA = 0x0000;
     //LATB = 0x0000;
 
-    TRISAbits.TRISA4 = 1;   //make the RX pin an input
+    TRISBbits.TRISB4 = 1;   //make the RX pin an input
 
     return 0;
 }

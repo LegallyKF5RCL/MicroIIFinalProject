@@ -20,7 +20,7 @@ UINT8 WaveSelect = 1;
 UINT8 UpdateIndex;
 UINT8 WaveIndex;
 unsigned int Blah = 0;
-void delay(unsigned long DelayCounter);
+//void delay(unsigned long DelayCounter);
 //initialize Max amplitude signal tables
 //these are constants to be multiplied down by the ADC factor
 const UINT16 ConstSinSignalTable[DIVISIONS] = {128, 144, 159, 175, 189, 203, 215, 226, 236, 243,
@@ -86,15 +86,29 @@ int main(int argc, char** argv) {
     //SetupSPI();
     //SetupADC();
     //ModuleDebug();
+
+    INTCON2bits.GIE = 1;
    
     printf("\r\nGood morning Master!\r\n");
     printf("\r\nRX Loop Back test is about to begin\r\n");
     printf("\r\nIf the Screen Fills with 'a' then it worked\r\n");
-    TRISBbits.TRISB2    = 0;
-    LATBbits.LATB2      = 0;
-    delay(10000);
+    TRISBbits.TRISB6    = 0;
+    LATBbits.LATB6      = 0;
+
     EnableIntU1RX;
     printf("a");
+
+    /*
+    while(1){
+    if(PORTAbits.RA4 == 0)
+    {
+        LATBbits.LATB6      = 0;
+    }
+    }
+    */
+
+    //_U1RXIF = 1;
+
     while(1);
     
     while(1)
@@ -111,19 +125,20 @@ int main(int argc, char** argv) {
 void __attribute__ ((auto_psv))     _ISR  _U1RXInterrupt(void)
 {
     char Dummy;
-    static char DummyCount = 0;
+    static unsigned int DummyCount = 0;
     _U1RXIF = 0;          //clear interrupt flag
+    //LATBbits.LATB6 = 1;
     //printf("ISRGET!");
     Dummy = U1RXREG;      //echo recieved character
     U1TXREG = Dummy;
-    if(DummyCount < 10)
+    if(DummyCount < 1000)
     {
-        LATBbits.LATB2      = 0;
+        LATBbits.LATB6      = 0;
         DummyCount++;
     }
     else
     {
-        LATBbits.LATB2      = 1;
+        LATBbits.LATB6      = 1;
     }
 
     
@@ -131,9 +146,3 @@ void __attribute__ ((auto_psv))     _ISR  _U1RXInterrupt(void)
     return;
 }
 
-void delay(unsigned long DelayCounter)
-{
-    while(DelayCounter-->0)
-        Nop();
-   return;
-}
