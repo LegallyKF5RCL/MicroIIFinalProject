@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <Generic.h>
 #include <p33EP128GP502.h>
+#include <spi.h>
 #include "MicroIIFinalProjectHeader.h"
 
 
@@ -8,8 +9,9 @@
 //DEBUG DEFINES
     //#define DEBUG
     //#define UART_TX
-    #define UART_RX
+    //#define UART_RX
     //#define SPI_DEBUG
+    #define ADC_DEBUG
 
 UINT16 ModuleDebug(void)
 {
@@ -44,17 +46,37 @@ UINT16 ModuleDebug(void)
 #warning DEBUG_MODE_SPI_ONLY
         UINT16 i, j; //arbitrary counters
         while(1){
-        for(i = 0; i < 0x000F; i++)
+        for(i = 0; i < 0x0002; i++)
         {
             for(j = 0; j < 0xFFFF; j++)
             {
                 asm("NOP");     //blocking wait
             }
         }
-
-        SPI2BUF = 0x5AA5;     //write to the SPI Buffer
+        WriteSPI1(0x5AA5);
+        //SPI1BUF = 0x5AA5;     //write to the SPI Buffer
         }
 #endif  //SPI_DEBUG end
+
+#ifdef ADC_DEBUG
+        UINT16 i, j; //arbitrary counters
+        while(1)
+        {
+            AD1CON1bits.SAMP = 1;
+            for(i = 0; i < 0x0002; i++)
+            {
+                for(j = 0; j < 0xFFFF; j++)
+                {
+                    asm("NOP");     //blocking wait
+                }
+            }
+            AD1CON1bits.SAMP = 0;
+            //LATBbits.LATB12 = 1;
+            //U1TXREG = ADC1BUF0 << 6;
+            U1TXREG = ADC1BUF0;
+            
+        }
+#endif  //ADC_DEBUG end
 
 return 0; //Return success
 }

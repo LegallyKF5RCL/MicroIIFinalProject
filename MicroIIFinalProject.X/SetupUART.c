@@ -39,7 +39,7 @@ void SetupUART(void)
             U1STAbits.UTXINV = 0;           //make TX active low
             //U1STAbits.URXISEL = 0x00;       //force interrupt on every 8 bits recieved
 
-            ConfigIntUART1(UART_RX_INT_DIS &
+            ConfigIntUART1(UART_RX_INT_EN &
                     UART_RX_INT_PR4 &
                     UART_TX_INT_DIS
                     );

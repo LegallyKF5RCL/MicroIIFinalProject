@@ -20,7 +20,7 @@ UINT8 WaveSelect = 1;
 UINT8 UpdateIndex;
 UINT8 WaveIndex;
 unsigned int Blah = 0;
-//void delay(unsigned long DelayCounter);
+
 //initialize Max amplitude signal tables
 //these are constants to be multiplied down by the ADC factor
 const UINT16 ConstSinSignalTable[DIVISIONS] = {128, 144, 159, 175, 189, 203, 215, 226, 236, 243,
@@ -69,7 +69,7 @@ _FWDT(FWDTEN_OFF &          //watchdog timer off
         WDTPRE_PR128        //something turns the WDT on
         );
 _FOSC(POSCMD_NONE &       //no external osc
-        OSCIOFNC_OFF &    //set the pin as a clock out
+        OSCIOFNC_ON &    //set the pin as a clock out
         IOL1WAY_OFF &     //allow multiple configs
         FCKSM_CSDCMD
         );
@@ -80,34 +80,23 @@ _FOSCSEL(FNOSC_FRC &        //start off with RC
 
 int main(int argc, char** argv) {
 
+    INTCON2bits.GIE = 1;
+
     Initialize();
     StartUp();
     SetupUART();
-    //SetupSPI();
-    //SetupADC();
-    //ModuleDebug();
+    SetupSPI();
+    SetupADC();
+    ModuleDebug();
 
-    INTCON2bits.GIE = 1;
-   
-    printf("\r\nGood morning Master!\r\n");
-    printf("\r\nRX Loop Back test is about to begin\r\n");
-    printf("\r\nIf the Screen Fills with 'a' then it worked\r\n");
-    TRISBbits.TRISB6    = 0;
-    LATBbits.LATB6      = 0;
 
-    EnableIntU1RX;
-    printf("a");
+    printf("\r\nOhayou Gozaimasu Taicho-sama!\r\n");
+    printf("\r\nSend '1' for square wave\r\n");
+    printf("\r\nSend '2' for sin wave\r\n");
+    printf("\r\nSend '3' for triangle wave\r\n");
 
-    /*
-    while(1){
-    if(PORTAbits.RA4 == 0)
-    {
-        LATBbits.LATB6      = 0;
-    }
-    }
-    */
 
-    //_U1RXIF = 1;
+    
 
     while(1);
     
@@ -122,6 +111,39 @@ int main(int argc, char** argv) {
     return (EXIT_SUCCESS);
 }
 
+
+void __attribute__ ((auto_psv))     _ISR  _U1RXInterrupt(void)
+{
+    UINT16 Hold;
+
+    _U1RXIF = 0;          //clear interrupt flag
+
+    Hold = U1RXREG;
+
+    switch (Hold)
+    {
+        case 1:
+           WaveSelect = 1;
+           printf("\r\n\tSquare wave activated...\r\n");
+           break;
+        case 2:
+            WaveSelect = 2;
+            printf("\r\n\tSin wave activated...\r\n");
+            break;
+        case 3:
+            WaveSelect = 3;
+            printf("\r\n\tTriangle wave activated...\r\n");
+            break;
+        default:
+           printf("\r\nInvalid Input!\r\n");
+           printf("\r\n\tSquare wave defaulted!\r\n");
+    }
+
+    return;
+}
+ 
+
+/*
 void __attribute__ ((auto_psv))     _ISR  _U1RXInterrupt(void)
 {
     char Dummy;
@@ -145,4 +167,6 @@ void __attribute__ ((auto_psv))     _ISR  _U1RXInterrupt(void)
 
     return;
 }
+ * */
+
 
