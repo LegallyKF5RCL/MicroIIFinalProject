@@ -13,8 +13,8 @@ UINT16 SetupADC(void)
     AD1CON1bits.ADSIDL = 0; //continue in idle mode
     AD1CON1bits.AD12B = 0;  //10-bit operation
     AD1CON1bits.FORM = 0;   //format to integer values
-    //AD1CON1bits.SSRC = 0x07;    //b'111', internal counter ends sampling and starts conversion
-    AD1CON1bits.SSRC = 0x00;    //b'000', clearing the sample bit ends sampling and starts conversion
+    AD1CON1bits.SSRC = 0x07;    //b'111', internal counter ends sampling and starts conversion
+    //AD1CON1bits.SSRC = 0x00;    //b'000', clearing the sample bit ends sampling and starts conversion
     AD1CON1bits.SIMSAM = 1;     //sample all channels simultaneously
     AD1CON1bits.ASAM = 1;       //Sampling begins immediately after last conversion
                                     //so just sample as much as possible.
@@ -37,14 +37,18 @@ UINT16 SetupADC(void)
                                     //first half on first interrupt
                                     //second half on next interrupt
     AD1CON2bits.ALTS = 0;       //Alternate Input Sample Mode
-                                    //Always use channel input selects for Sample A
+                                    //for channel 0 only inputs specified by CH0SA and CH0NA
 
 //AD1CON3: ADC1 Control Register 3
-    AD1CON3bits.ADRC = 0;       //ADC uses system clock
+    AD1CON3bits.ADRC = 1;       //ADC uses system clock
     AD1CON3bits.SAMC = 0x0F;    //Auto sample time bits
                                     //b'11111' = 31 TAD
     AD1CON3bits.ADCS = 0x00;    //ADC conversion clock select bits
                                     //Tcy and TAD are 1:1
+                                //page 17
+                                    //minimum of 75ns
+                                    //at clock speed of 7.370MHz
+                                    //TCY is 271ns
 
 //AD1CON4: ADC1 Control Register 4
     AD1CON4bits.DMABL = 0x00;   //DMA buffer locations per analog input bits

@@ -31,3 +31,5 @@ void SetupUART(void);
 UINT16 ModuleDebug(void);
 UINT16 Initialize(void);
 void StartUp(void);
+void configSPI1(void);
+

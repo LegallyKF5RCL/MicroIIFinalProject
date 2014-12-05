@@ -14,6 +14,7 @@
 #include <uart.h>
 #include "MicroIIFinalProjectHeader.h"
 
+
 double Amp = 0.0;
 UINT16 Freq = 0;
 UINT8 WaveSelect = 1;
@@ -110,7 +111,6 @@ int main(int argc, char** argv) {
     
     return (EXIT_SUCCESS);
 }
-
 
 void __attribute__ ((auto_psv))     _ISR  _U1RXInterrupt(void)
 {
