@@ -6,15 +6,72 @@
 UINT16 SetupADC(void)
 {
 
+    OpenADC1(ADC_MODULE_ON &        //config 1
+            ADC_IDLE_CONTINUE &
+            ADC_AD12B_10BIT &
+            ADC_FORMAT_INTG &
+            ADC_SSRC_MANUAL &
+            ADC_SIMULTANEOUS &
+            ADC_AUTO_SAMPLING_OFF
+            ,
+            ADC_VREF_AVDD_AVSS &    //config 2
+            ADC_SELECT_CHAN_0123 &
+            ADC_ALT_BUF_OFF &
+            ADC_ALT_INPUT_OFF
+            ,
+            ADC_SAMPLE_TIME_31 &    //config 3
+            ADC_CONV_CLK_SYSTEM &
+            ADC_CONV_CLK_1Tcy
+            ,
+            ADC_DMA_DIS &           //config 4
+            ADC_CH123_NEG_SAMPLEB_VREFN &
+            ADC_CH123_POS_SAMPLEB_0_1_2 &
+            ADC_CH123_NEG_SAMPLEA_VREFN &
+            ADC_CH123_POS_SAMPLEA_0_1_2 &
+            ADC_CH0_NEG_SAMPLEB_VREFN &
+            ADC_CH0_POS_SAMPLEB_AN3 &
+            ADC_CH0_NEG_SAMPLEA_VREFN &
+            ADC_CH0_POS_SAMPLEA_AN3
+            ,
+            ENABLE_AN0_ANA &        //configport a
+            ENABLE_AN1_ANA
+            ,
+            ENABLE_AN2_ANA &
+            ENABLE_AN3_ANA
+            ,
+            0x0000
+            ,
+            0x0000
+            ,
+            0x0000
+            ,
+            0x0000
+            ,
+            0x0000
+            ,
+            0x0000
+            ,
+            0x0000
+            ,
+            0x0000
+            ,
+            0x0000
+            ,
+            SCAN_NONE_16_31
+            ,
+            SCAN_NONE_0_15
+            );
 
+    DisableIntADC1();
+
+/*
 
 //AD1CON1: ADC1 Control Register 1
     AD1CON1bits.ADON = 0;   //turn off module
     AD1CON1bits.ADSIDL = 0; //continue in idle mode
     AD1CON1bits.AD12B = 0;  //10-bit operation
     AD1CON1bits.FORM = 0;   //format to integer values
-    AD1CON1bits.SSRC = 0x07;    //b'111', internal counter ends sampling and starts conversion
-    //AD1CON1bits.SSRC = 0x00;    //b'000', clearing the sample bit ends sampling and starts conversion
+    AD1CON1bits.SSRC = 0b111;    //b'111', internal counter ends sampling and starts conversion
     AD1CON1bits.SIMSAM = 1;     //sample all channels simultaneously
     AD1CON1bits.ASAM = 1;       //Sampling begins immediately after last conversion
                                     //so just sample as much as possible.
@@ -27,22 +84,14 @@ UINT16 SetupADC(void)
                                     //AVDD for Vref-High
                                     //AVSS for Vref-Low
     AD1CON2bits.CSCNA = 0;      //do not scan inputs
-                                    //Not sure if this is applicable
-    AD1CON2bits.CHPS = 0x03;    //Converts all channels
-    //AD1CON2bits.BUFS = ?;     //Read only
-                                    //1 means access data in first half of the buffer
-                                    //0 means access data in second half of the buffer
-    //AD1CON2bits.SMPI = ?;     //this is DMA, DoNotCare right now
+    AD1CON2bits.CHPS = 0b11;    //Converts all channels
     AD1CON2bits.BUFM = 1;       //buffer fill mode select
-                                    //first half on first interrupt
-                                    //second half on next interrupt
     AD1CON2bits.ALTS = 0;       //Alternate Input Sample Mode
                                     //for channel 0 only inputs specified by CH0SA and CH0NA
 
 //AD1CON3: ADC1 Control Register 3
     AD1CON3bits.ADRC = 1;       //ADC uses system clock
-    AD1CON3bits.SAMC = 0x0F;    //Auto sample time bits
-                                    //b'11111' = 31 TAD
+    AD1CON3bits.SAMC = 0x1F;    //Auto sample time bits
     AD1CON3bits.ADCS = 0x00;    //ADC conversion clock select bits
                                     //Tcy and TAD are 1:1
                                 //page 17
@@ -52,26 +101,24 @@ UINT16 SetupADC(void)
 
 //AD1CON4: ADC1 Control Register 4
     AD1CON4bits.DMABL = 0x00;   //DMA buffer locations per analog input bits
-                                    //DNC right now
-                                    //Current setting
-                                        //Sets 1 word of buffer to each analog input
+
 
 //AD1CHS123: ADC1 Input Channel 1, 2, 3 Select Register
-    AD1CHS123bits.CH123NB = 0x00;   //CH1,2,3 Negative input for Sample B is Vrefl
+    AD1CHS123bits.CH123NB = 0b00;   //CH1,2,3 Negative input for Sample B is Vrefl
     AD1CHS123bits.CH123SB = 0;      //Positive input for Sample B
-                                    //CH1 is AN0
-                                    //CH2 is AN1
-                                    //CH3 is AN2
-    AD1CHS123bits.CH123NA = 0x00;   //CH1,2,3 Negative input for Sample A is Vrefl
+                                        //CH1 is AN0
+                                        //CH2 is AN1
+                                        //CH3 is AN2
+    AD1CHS123bits.CH123NA = 0b00;   //CH1,2,3 Negative input for Sample A is Vrefl
     AD1CHS123bits.CH123SA = 0;      //Positive input for Sample A
-                                    //CH1 is AN0
-                                    //CH2 is AN1
-                                    //CH3 is AN2
+                                        //CH1 is AN0
+                                        //CH2 is AN1
+                                        //CH3 is AN2
 
     AD1CHS0bits.CH0NB = 0;          //CH0 negative input is Vrefl for sample B
-    AD1CHS0bits.CH0SB = 0x1F;       //CH0 Positive input is AN31 for sample B
+    AD1CHS0bits.CH0SB = 0x00;       //CH0 Positive input is AN31 for sample B
     AD1CHS0bits.CH0NA = 0;          //CH0 negative input is Vrefl for sample A
-    AD1CHS0bits.CH0SA = 0x1F;       //CH0 positive input is AN31 for Sample A
+    AD1CHS0bits.CH0SA = 0b00000;
 
 
 
@@ -81,39 +128,8 @@ UINT16 SetupADC(void)
     //AD1PCFGL                      //doesnt exist for this chip?
 
     AD1CON1bits.ADON = 1;           //now that things are setup, turn module on
-   
 
-
-//TO BE CONTINUED
-
-    /*
-    OpenADC1(//config1
-            ADC_MODULE_ON &     //turn on the module
-            ADC_IDLE_CONTINUE & //continue in idle mode
-            ADC_AD12B_10BIT &    //10 bit mode - 4 channel
-            ADC_FORMAT_INTG &        //ADC formatted as unsigned integer
-                                    //header says just integer (assuming unsigned)
-            ADC_SSRC_AUTO &     //i have no idea what these do
-                                //I need to read family ref
-                                //until then ill just try to fill out the config
-            ADC_SIMULTANEOUS &  //sample all channels imultaneously
-            ADC_AUTO_SAMPLING_ON      //keep sampling over and over
-            ,
-            //config2
-            ,
-            //config3
-            ,
-            //config4
-            ,
-            //configport_l
-            ,
-            //configport_h
-            ,
-            //configscan_h
-            ,
-            //configscan_l
-            );
-    */
+ */
 
     return 0;
 }

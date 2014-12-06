@@ -44,7 +44,7 @@ UINT16 ModuleDebug(void)
 
 #ifdef SPI_DEBUG
 #warning DEBUG_MODE_SPI_ONLY
-        UINT16 i, j; //arbitrary counters
+        UINT16 i, j, TESTING = 0x0000; //arbitrary counters
         while(1){
         for(i = 0; i < 0x0002; i++)
         {
@@ -54,7 +54,8 @@ UINT16 ModuleDebug(void)
             }
         }
         //WriteSPI1(0x5AA5);
-        SPI1BUF = 0xFFFF;     //write to the SPI Buffer
+        TESTING++;
+        SPI1BUF = TESTING;      //write to the SPI Buffer
         }
 #endif  //SPI_DEBUG end
 
@@ -64,30 +65,23 @@ UINT16 ModuleDebug(void)
         UINT16 LowByte;
         while(1)
         {
-            //AD1CON1bits.SAMP = 1;
+            AD1CON1bits.SAMP = 1;
             for(i = 0; i < 0x0002; i++)
-            {
+                {
                 for(j = 0; j < 0xFFFF; j++)
                 {
                     asm("NOP");     //blocking wait
                 }
             }
-            //AD1CON1bits.SAMP = 0;
-            for(i = 0; i < 0x0002; i++)
-            {
-                for(j = 0; j < 0xFFFF; j++)
-                {
-                    asm("NOP");     //blocking wait
-                }
-            }
-            //LATBbits.LATB12 = 1;
-            //U1TXREG = ADC1BUF0;
+            AD1CON1bits.SAMP = 0;
+            while(!AD1CON1bits.DONE);
+            LATBbits.LATB15 = 1;
+
             LowByte = ADC1BUF0 & 0x00FF;
             HighByte = (ADC1BUF0 & 0xFF00) >> 8;
 
             U1TXREG = HighByte;
             U1TXREG = LowByte;
-            //printf("\n");
             
         }
 #endif  //ADC_DEBUG end

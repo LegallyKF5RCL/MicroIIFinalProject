@@ -15,10 +15,13 @@ UINT16 Initialize(void)
 
     TRISAbits.TRISA0 = 1;
     TRISAbits.TRISA1 = 1;
+    TRISAbits.TRISA2 = 1;
+    TRISAbits.TRISA3 = 1;
+
     ANSELAbits.ANSA0 = 0;       //Make AN0 analog
     ANSELAbits.ANSA1 = 0;       //Make AN1 analog
-
-
+    ANSELBbits.ANSB0 = 0;
+    ANSELBbits.ANSB1 = 0;
 
     TRISBbits.TRISB4 = 1;   //make the RB4 pin a digital input (RX)
     TRISBbits.TRISB9 = 1;   //make RB9 a digital input (SDI)
