@@ -6,6 +6,7 @@
 UINT16 SetupADC(void)
 {
 
+    /*
     OpenADC1(ADC_MODULE_ON &        //config 1
             ADC_IDLE_CONTINUE &
             ADC_AD12B_10BIT &
@@ -21,7 +22,7 @@ UINT16 SetupADC(void)
             ,
             ADC_SAMPLE_TIME_31 &    //config 3
             ADC_CONV_CLK_SYSTEM &
-            ADC_CONV_CLK_1Tcy
+            ADC_CONV_CLK_128Tcy
             ,
             ADC_DMA_DIS &           //config 4
             ADC_CH123_NEG_SAMPLEB_VREFN &
@@ -64,59 +65,43 @@ UINT16 SetupADC(void)
 
     DisableIntADC1();
 
-/*
+     */
+
+
 
 //AD1CON1: ADC1 Control Register 1
-    AD1CON1bits.ADON = 0;   //turn off module
-    AD1CON1bits.ADSIDL = 0; //continue in idle mode
-    AD1CON1bits.AD12B = 0;  //10-bit operation
-    AD1CON1bits.FORM = 0;   //format to integer values
-    AD1CON1bits.SSRC = 0b111;    //b'111', internal counter ends sampling and starts conversion
-    AD1CON1bits.SIMSAM = 1;     //sample all channels simultaneously
-    AD1CON1bits.ASAM = 1;       //Sampling begins immediately after last conversion
-                                    //so just sample as much as possible.
-                                    //SAMP bit is autoset by hardware
-    //AD1CON1bits.SAMP = ?;     //this should be set by hardware from the line above
-                                    //but its able to be software written so what does that mean?
+    AD1CON1bits.ADON = 0;           //turn off module
+    AD1CON1bits.ADSIDL = 0;         //continue in idle mode
+    AD1CON1bits.AD12B = 0;          //10-bit operation
+    AD1CON1bits.FORM = 0;           //format to integer values
+    AD1CON1bits.SSRC = 0b000;       //b'111', internal counter ends sampling and starts conversion
+    AD1CON1bits.SIMSAM = 0;         //sample all channels simultaneously
+    AD1CON1bits.ASAM = 0;           //Sampling begins when SAMP is set
 
 //AD1CON2: ADC1 Control Register 2
-    AD1CON2bits.VCFG = 0x00;    //Voltage References
-                                    //AVDD for Vref-High
-                                    //AVSS for Vref-Low
-    AD1CON2bits.CSCNA = 0;      //do not scan inputs
-    AD1CON2bits.CHPS = 0b11;    //Converts all channels
-    AD1CON2bits.BUFM = 1;       //buffer fill mode select
-    AD1CON2bits.ALTS = 0;       //Alternate Input Sample Mode
-                                    //for channel 0 only inputs specified by CH0SA and CH0NA
+    AD1CON2bits.VCFG = 0b000;       //Voltage References
+    AD1CON2bits.CSCNA = 0;          //do not scan inputs
+    AD1CON2bits.CHPS = 0b00;        //converts CH0
+    AD1CON2bits.SMPI = 0b0000;      //generates interrupt after completion of every sample/conversion operation
+    AD1CON2bits.ALTS = 0;           //Alternate Input Sample Mode
 
 //AD1CON3: ADC1 Control Register 3
-    AD1CON3bits.ADRC = 1;       //ADC uses system clock
-    AD1CON3bits.SAMC = 0x1F;    //Auto sample time bits
-    AD1CON3bits.ADCS = 0x00;    //ADC conversion clock select bits
-                                    //Tcy and TAD are 1:1
-                                //page 17
-                                    //minimum of 75ns
-                                    //at clock speed of 7.370MHz
-                                    //TCY is 271ns
+    AD1CON3bits.ADRC = 1;       //Clock select
+    AD1CON3bits.SAMC = 0x02;    //Auto sample time bits
+    AD1CON3bits.ADCS = 0x02;    //ADC conversion clock select bits, doesnt apply when ADRC is 1
 
 //AD1CON4: ADC1 Control Register 4
     AD1CON4bits.DMABL = 0x00;   //DMA buffer locations per analog input bits
 
-
 //AD1CHS123: ADC1 Input Channel 1, 2, 3 Select Register
     AD1CHS123bits.CH123NB = 0b00;   //CH1,2,3 Negative input for Sample B is Vrefl
-    AD1CHS123bits.CH123SB = 0;      //Positive input for Sample B
-                                        //CH1 is AN0
-                                        //CH2 is AN1
-                                        //CH3 is AN2
+    AD1CHS123bits.CH123SB = 1;      //Positive input for Sample B
     AD1CHS123bits.CH123NA = 0b00;   //CH1,2,3 Negative input for Sample A is Vrefl
-    AD1CHS123bits.CH123SA = 0;      //Positive input for Sample A
-                                        //CH1 is AN0
-                                        //CH2 is AN1
-                                        //CH3 is AN2
+    AD1CHS123bits.CH123SA = 1;      //Positive input for Sample A
 
+//AD1CHS0: ADCx Input Channel 0 Select Register
     AD1CHS0bits.CH0NB = 0;          //CH0 negative input is Vrefl for sample B
-    AD1CHS0bits.CH0SB = 0x00;       //CH0 Positive input is AN31 for sample B
+    AD1CHS0bits.CH0SB = 0b00000;       //CH0 Positive input is AN31 for sample B
     AD1CHS0bits.CH0NA = 0;          //CH0 negative input is Vrefl for sample A
     AD1CHS0bits.CH0SA = 0b00000;
 
@@ -129,7 +114,6 @@ UINT16 SetupADC(void)
 
     AD1CON1bits.ADON = 1;           //now that things are setup, turn module on
 
- */
 
     return 0;
 }

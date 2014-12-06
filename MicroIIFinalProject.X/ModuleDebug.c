@@ -11,7 +11,7 @@
     //#define UART_TX
     //#define UART_RX
     //#define SPI_DEBUG
-    #define ADC_DEBUG
+    //#define ADC_DEBUG
 
 UINT16 ModuleDebug(void)
 {
@@ -66,16 +66,18 @@ UINT16 ModuleDebug(void)
         while(1)
         {
             AD1CON1bits.SAMP = 1;
-            for(i = 0; i < 0x0002; i++)
-                {
+
+            for(i = 0; i < 0x0003; i++)
+            {
                 for(j = 0; j < 0xFFFF; j++)
                 {
-                    asm("NOP");     //blocking wait
+                    asm("NOP");
                 }
             }
+
             AD1CON1bits.SAMP = 0;
             while(!AD1CON1bits.DONE);
-            LATBbits.LATB15 = 1;
+            LATBbits.LATB15 ^= 1;
 
             LowByte = ADC1BUF0 & 0x00FF;
             HighByte = (ADC1BUF0 & 0xFF00) >> 8;
