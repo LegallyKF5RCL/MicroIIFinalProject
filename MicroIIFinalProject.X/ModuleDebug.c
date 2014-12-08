@@ -7,7 +7,6 @@
 
 
 //DEBUG DEFINES
-    //#define DEBUG
     //#define UART_TX
     //#define UART_RX
     //#define SPI_DEBUG
@@ -20,7 +19,7 @@ UINT16 ModuleDebug(void)
 #warning DEBUG_MODE_UART_TX_ONLY
         UINT16 i, j; //arbitrary counters
         while(1){
-        for(i = 0; i < 0x0002; i++)
+        for(i = 0; i < 0x000F; i++)
         {
             for(j = 0; j < 0xFFFF; j++)
             {

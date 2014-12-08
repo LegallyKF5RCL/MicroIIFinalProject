@@ -13,7 +13,7 @@ UINT16 SetupSPI(void)
 
     SPI1CON1bits.DISSCK = 0;        //Internal SPI clock is enabled
     SPI1CON1bits.DISSDO = 0;        //SDO pin is controlled by this module
-    SPI1CON1bits.MODE16 = 0;        //communication is 8bit
+    SPI1CON1bits.MODE16 = 1;        //communication is 8bit
     SPI1CON1bits.SMP = 0;           //input data sampled at middle of data output time
     SPI1CON1bits.CKE = 0;           //serial output data changes on transition from idle to active clock state
     SPI1CON1bits.SSEN = 0;          //slave select pin not used by module, pin controlled by port function

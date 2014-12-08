@@ -69,7 +69,7 @@
 
 #pragma once
 
-#include <stdint.h>
+//#include <stdint.h>
 #include "pic24_chip.h"
 #include "pic24_libconfig.h"
 
@@ -232,7 +232,7 @@
 
 // Check to see if this clock configuration supports that processor.
 #if !GET_IS_SUPPORTED(CLOCK_CONFIG)
-# error "The clock configuration chosen is not supported by this processor."
+//# error "The clock configuration chosen is not supported by this processor."
 #endif
 
 // Check that the primary oscillator type chosen works for the

@@ -54,21 +54,23 @@
  *          corresponding to the ADC conversion result.
  */
 
-//#ifndef BUILT_ON_ESOS // Excluded from ESOS builds due to a busy loop
-//uint16_t convertADC1(void) {
-//  uint8_t u8_wdtState;
-//
-//  //sz_lastTimeoutError = "convertADC1()";
-//  u8_wdtState = _SWDTEN;                  //save WDT state
-//  _SWDTEN = 1;                            //enable WDT since we block
-//  SET_SAMP_BIT_ADC1();                    //start sampling
-//  //asm("NOP");                                  //takes one clock to clear previous DONE flag, delay before checking.
-//  WAIT_UNTIL_CONVERSION_COMPLETE_ADC1();  //wait for conversion to finish
-//  _SWDTEN = u8_wdtState;                  //restore WDT
-//  //sz_lastTimeoutError = NULL;             //reset error message
-//  return(ADC1BUF0);
-//}
-//#endif
+/*
+#ifndef BUILT_ON_ESOS // Excluded from ESOS builds due to a busy loop
+uint16_t convertADC1(void) {
+  uint8_t u8_wdtState;
+
+  sz_lastTimeoutError = "convertADC1()";
+  u8_wdtState = _SWDTEN;                  //save WDT state
+  _SWDTEN = 1;                            //enable WDT since we block
+  SET_SAMP_BIT_ADC1();                    //start sampling
+  asm("NOP");                                  //takes one clock to clear previous DONE flag, delay before checking.
+  WAIT_UNTIL_CONVERSION_COMPLETE_ADC1();  //wait for conversion to finish
+  _SWDTEN = u8_wdtState;                  //restore WDT
+  sz_lastTimeoutError = NULL;             //reset error message
+  return(ADC1BUF0);
+}
+#endif
+ */
 
 /** Configures ADC1 to perform 10-/12-bit conversion on a single channel via
  *  CH0.  The sampling is done against the AVDD and AVSS references and

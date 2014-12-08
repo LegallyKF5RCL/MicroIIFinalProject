@@ -38,7 +38,6 @@
       <itemPath>MicroIIFinalProjectMain.c</itemPath>
       <itemPath>StartUp.c</itemPath>
       <itemPath>SetupADC.c</itemPath>
-      <itemPath>GetADC.c</itemPath>
       <itemPath>UpdateTable.c</itemPath>
       <itemPath>MicroIIFinalProjectHeader.h</itemPath>
       <itemPath>SetupSPI.c</itemPath>
@@ -46,6 +45,8 @@
       <itemPath>Initialize.c</itemPath>
       <itemPath>ModuleDebug.c</itemPath>
       <itemPath>pic24_adc.c</itemPath>
+      <itemPath>SetupTimer.c</itemPath>
+      <itemPath>FreqSelectTable.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -7,22 +7,22 @@
 
 //DEFINES
 #define DIVISIONS 100
+#define Fosc        7370000
 
 
 //GLOBALS
 extern UINT8 WaveSelect;
-extern UINT8 UpdateIndex;
 extern UINT8 WaveIndex;
+extern UINT16 DacConfig;
 extern double Amp;
 extern double Multiplier;
-extern UINT16 Freq;
 extern UINT16 FreqSelect[1024];
 extern const UINT8 ConstSinSignalTable[DIVISIONS];
 extern const UINT8 ConstSqrSignalTable[DIVISIONS];
 extern const UINT8 ConstTriSignalTable[DIVISIONS];
-extern double SinSignalTable[DIVISIONS];
-extern double SqrSignalTable[DIVISIONS];
-extern double TriSignalTable[DIVISIONS];
+extern UINT8 DoubleSinTable[DIVISIONS];
+extern UINT8 DoubleSqrTable[DIVISIONS];
+extern UINT8 DoubleTriTable[DIVISIONS];
 
 //FUNCTION DECLARATIONS
 UINT16 GetADC(void);
@@ -34,4 +34,6 @@ UINT16 ModuleDebug(void);
 UINT16 Initialize(void);
 void StartUp(void);
 void configSPI1(void);
+void FreqSelectTable(void);
+UINT16 SetupTimer(void);
 
